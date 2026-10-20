@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grovers-inspired-memory"
+version = "0.1.0"
+description = "Experimental deterministic, temporal fact memory with Grover-inspired selection and graph context."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Sal (sal-jim)" }]
+keywords = ["memory", "retrieval", "pagerank", "pgvector", "grover", "agents"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2,<4"]
+semantic = ["sentence-transformers>=3,<6"]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1,<2", "twine>=6,<7"]
+
+[project.scripts]
+gim = "grovers_memory.cli:main"
+
+[project.urls]
+Repository = "https://github.com/sal-jim/grovers-inspired-memory"
+Issues = "https://github.com/sal-jim/grovers-inspired-memory/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+grovers_memory = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["postgres: requires GIM_TEST_POSTGRES_URL and pgvector"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

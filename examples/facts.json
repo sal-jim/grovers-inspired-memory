@@ -1,0 +1,29 @@
+[
+  {
+    "text": "Maya is building Project Atlas, an offline field-research notebook.",
+    "key": "project.atlas.description",
+    "entities": ["Maya", "Project Atlas"],
+    "tags": ["research"],
+    "observed_at": "2026-10-01T09:00:00Z"
+  },
+  {
+    "text": "Project Atlas uses SQLite to keep field notes available offline.",
+    "key": "project.atlas.storage",
+    "entities": ["Project Atlas"],
+    "tags": ["research", "storage"],
+    "observed_at": "2026-10-02T09:00:00Z"
+  },
+  {
+    "text": "Maya tests Project Atlas with marine biologists on coastal surveys.",
+    "entities": ["Maya", "Project Atlas"],
+    "tags": ["research"],
+    "observed_at": "2026-10-03T09:00:00Z"
+  },
+  {
+    "text": "Maya prefers jasmine tea during long reading sessions.",
+    "key": "profile.tea",
+    "entities": ["Maya"],
+    "tags": ["food"],
+    "observed_at": "2026-10-01T09:00:00Z"
+  }
+]
