@@ -83,7 +83,13 @@ def amplify(scores: list[float], ratio: float = 0.90) -> dict:
     maximum = max(scores)
     marked = [index for index, score in enumerate(scores) if score >= ratio * maximum]
     theta = math.asin(math.sqrt(len(marked) / n))
-    rounds = max(0, math.floor(math.pi / (4 * theta) - 0.5))
+    # libm implementations can put an exact integer a few ulps below its value
+    # (notably M=1, N=4). Snap only near-integer numerical roundoff before floor.
+    ideal = math.pi / (4 * theta) - 0.5
+    nearest = round(ideal)
+    if math.isclose(ideal, nearest, rel_tol=0, abs_tol=1e-12):
+        ideal = float(nearest)
+    rounds = max(0, math.floor(ideal))
     amplitudes = [1 / math.sqrt(n)] * n
     for _ in range(rounds):
         for index in marked:

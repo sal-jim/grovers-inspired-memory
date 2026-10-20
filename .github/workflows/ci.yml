@@ -6,6 +6,7 @@ jobs:
   python:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python: ['3.11', '3.12', '3.13', '3.14']
     steps:
@@ -33,7 +34,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd 'pg_isready -U gim -d gim'
+          --health-cmd "pg_isready -U gim -d gim"
           --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       GIM_TEST_POSTGRES_URL: postgresql://gim:ci-only@localhost:5432/gim

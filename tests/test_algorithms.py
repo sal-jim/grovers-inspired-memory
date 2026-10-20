@@ -27,6 +27,12 @@ def test_amplification_normalized(scores):
         assert not result["marked"]
 
 
+def test_amplification_round_count_handles_libm_roundoff(monkeypatch):
+    original = math.asin
+    monkeypatch.setattr(math, "asin", lambda value: original(value) + 2e-16)
+    assert amplify([1, 0.1, 0.1, 0.1])["rounds"] == 1
+
+
 def test_pagerank_stationary_distribution_and_order():
     cfg = RetrievalConfig()
     ranks, _, converged = personalized_pagerank(
